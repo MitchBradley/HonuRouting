@@ -3,13 +3,19 @@ G17
 G20
 
 ; Top side, first operation. Stock has been flipped from the bottom side.
-; The XY grid (#100-108 / #200-208) carries over from the bottom run.  If
-; it is missing (e.g. a reset since the bottom run), ProbeLoop.nc rebuilds
-; it; if the fixturing changed, re-run PutterGrid.nc by hand first.
-; Re-probe here to capture top-side stock heights: this overwrites
-; #300-308 (probed Z) and #400-408 (deltas) with top-side values.
+; The XY grid (#100-108 / #200-208) carries over from the bottom run; if
+; the fixturing changed, re-run PutterGrid.nc by hand first.
 T24  ; top roundover form mill - select before length probing
-$sd/run=/Loop/ProbeLoop.nc   ; re-probes; sets #<_probed>=1
+
+; Probe if we don't already have valid probe data (e.g. run standalone).
+; BottomLoop clears #<_probed> at its end, so the normal post-flip run
+; re-probes here, capturing top-side heights into #300-308 / #400-408.
+o90 if [EXISTS[#<_probed>] EQ 0]
+  #<_probed>=0
+o90 endif
+o92 if [#<_probed> EQ 0]
+  $sd/run=/Loop/ProbeLoop.nc
+o92 endif
 
 G0 X#100 Y#200
 

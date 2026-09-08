@@ -3,14 +3,14 @@ G17
 G20
 
 ; Top side, second operation: T-shaped sight-line insets on all 9 pucks.
-; No 9-point re-probe - reuses the top-side height deltas (#400-408);
-; only re-zeros Z for the new tool against the toolsetter.
+; Normally reuses the top-side height deltas (#400-408) from an earlier
+; probe; if none (run standalone), probe now.  Either way the per-tool
+; G55 Z datum is re-established below via ProbeOne.
 o90 if [EXISTS[#<_probed>] EQ 0]
   #<_probed>=0
 o90 endif
 o92 if [#<_probed> EQ 0]
-  (MSG, TopTLinesLoop: no probe data - run TopRoundoverLoop.nc first)
-  o93 error [3]
+  $sd/run=/Loop/ProbeLoop.nc
 o92 endif
 
 G0 X#100 Y#200 Z#<_toolchange_z>
