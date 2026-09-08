@@ -9,10 +9,9 @@
 ; re-probe at position 0, with a different tool
 
 G20
-; Require that PutterGrid.nc has run and populated #100-108 / #200-208
+; Ensure the XY grid (#100-108 / #200-208) exists; build it if not
 o90 if [EXISTS[#<_grid_available>] EQ 0]
-  (MSG, ProbeLoop: PutterGrid.nc has not been run - aborting)
-  o91 error [3]
+  $sd/run=/Loop/PutterGrid.nc
 o90 endif
 
 ; ==========================================================
