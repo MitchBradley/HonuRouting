@@ -1,0 +1,15 @@
+G90 G94
+G17
+G20
+
+; Top side, full sequence. Run after BottomLoop.nc and after flipping the stock.
+; The XY grid (#100-108 / #200-208) carries over from the bottom run in the
+; usual case; if the fixturing changed, re-run PutterGrid.nc by hand first.
+;
+; TopRoundoverLoop re-probes for top-side stock heights and sets
+; #<_top_heights_available>; the other two loops guard on that flag.
+; Each sub-loop has its own M0 tool-change / safety pauses.
+
+$sd/run=/Loop/TopRoundoverLoop.nc
+$sd/run=/Loop/TopTLinesLoop.nc
+$sd/run=/Loop/TopCutoutLoop.nc

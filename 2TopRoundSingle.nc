@@ -1,0 +1,26 @@
+(2TopRoundSingle)
+(URH Hole)
+(Machine)
+(  vendor: Geometric Robotics)
+(  model: 2x2)
+(  description: GR3 2x2 Router)
+(T24  D=0.25 CR=0 - ZMIN=-0.56 - form mill)
+G90 G94
+G17
+G20
+
+(` 3)
+G0 X0.9661 Y-2.1903
+Z0.4
+Z0.1
+G1 Z-0.35 F10
+X0.6786 Y-2.276 F60
+G2 X-0.6786 Y2.276 I-0.6786 J2.276
+X0.6786 Y2.276 I0.6786 J-2.276
+G1 X0.9661 Y2.1903
+Z-0.56 F10
+X0.6786 Y2.276 F60
+G3 X-0.6786 Y-2.276 I-0.6786 J-2.276
+X0.6786 Y-2.276 I0.6786 J2.276
+G1 X0.9661 Y-2.1903
+G0 Z0.4
