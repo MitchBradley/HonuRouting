@@ -38,9 +38,7 @@ o100 while [#<_i> LT 9]
   #<y_val> = #[200 + #<_i>]
   G0 X#<x_val> Y#<y_val>
 
-  G38.2 G91 F#<_fast_rate> Z-#<_probe_drop>
-  G0 G91 Z#<_pulloff_distance>
-  G38.2 G91 F#<_slow_rate> Z-#<_probe_drop>
+  $sd/run=/Loop/ProbeOne.nc
   #[300 + #<_i>] = #5063         ; probe z
   #[400 + #<_i>] = [#5063 - #300]  ; delta z
 

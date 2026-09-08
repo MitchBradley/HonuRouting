@@ -15,10 +15,8 @@ G0 X#100 Y#200 Z#<_toolchange_z>
 T5  ; select before length probing
 M0 (MSG,install T5, position toolsetter, then cycle start)
 
-; Re-zero Z for the new tool against the toolsetter (same probe pattern as ProbeLoop)
-G38.2 G91 F#<_fast_rate> Z-#<_probe_drop>
-G0 G91 Z#<_pulloff_distance>
-G38.2 G91 F#<_slow_rate> Z-#<_probe_drop>
+; Re-zero Z for the new tool against the toolsetter
+$sd/run=/Loop/ProbeOne.nc
 G10 L20 P2 Z#<_toolsetter_height>  ; toolsetter surface -> toolsetter_height in G55
 G0 G91 Z#<_backoff_distance>
 G90
