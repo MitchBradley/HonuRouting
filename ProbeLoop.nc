@@ -29,16 +29,10 @@ o100 while [#<_i> LT 9]
   #<y_val> = #[200 + #<_i>]
   G0 X#<x_val> Y#<y_val>
 
-  $sd/run=/Loop/ProbeCore.nc
+  #<_set_datum> = [#<_i> EQ 0]  ; take the G55 Z datum from the puck-0 probe only
+  $sd/run=/Loop/ProbeOne.nc
   #[300 + #<_i>] = #5063         ; probe z
   #[400 + #<_i>] = [#5063 - #300]  ; delta z
-
-  o101 if [#<_i> EQ 0]
-    G10 L20 P2 Z#<_toolsetter_height>  ; set G55 Z datum from the puck-0 toolsetter probe
-  o101 endif
-
-  G0 G91 Z#<_backoff_distance>
-  G90
 
   ; Increment counter
   #<_i> = [#<_i> + 1]
