@@ -1,10 +1,13 @@
 ; Two-stage probe of the toolsetter at the current XY:
 ; fast approach, pull off, slow re-probe.
-; Requires the probe params from ProbeLoop.nc (global for the session):
-;   #<_fast_rate> #<_slow_rate> #<_probe_drop> #<_pulloff_distance>
 ; On return: #5063 holds the probed Z, the tool sits at the slow-probe
 ; contact point, and absolute mode (G90) is restored.  The caller
 ; records the result, sets any datum, and backs off.
+
+#<_fast_rate>=10 ; in/min
+#<_slow_rate>=1 ; in/min
+#<_probe_drop>=0.6 ; in - max probe descent below current Z (safety margin above hard limit)
+#<_pulloff_distance>=0.1 ; in
 
 G20
 G38.2 G91 F#<_fast_rate> Z-#<_probe_drop>

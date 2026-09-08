@@ -15,13 +15,10 @@ o90 if [EXISTS[#<_grid_available>] EQ 0]
   o91 error [3]
 o90 endif
 
-; Probe parameters - global so the tool-change re-probe in the top loops can reuse them
-#<_probe_drop>=0.6 ; in - max probe descent below current Z (safety margin above hard limit)
+; Toolsetter / backoff params - global so the tool-change re-probe in the
+; top loops can reuse them.  The probe rates and travel live in ProbeOne.nc.
 #<_toolsetter_height>=2.5 ; in
-#<_pulloff_distance>=0.1 ; in
 #<_backoff_distance>=0.5 ; in
-#<_fast_rate>=10 ; in/min
-#<_slow_rate>=1 ; in/min
 #<_toolchange_z>=[#<_toolsetter_height>+#<_backoff_distance>]
 
 ; ==========================================================
