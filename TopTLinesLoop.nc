@@ -3,23 +3,13 @@ G17
 G20
 
 ; Top side, second operation: T-shaped sight-line insets on all 9 pucks.
-; Normally reuses the top-side height deltas (#400-408) from an earlier
-; probe; if none (run standalone), probe now.  Either way the per-tool
-; G55 Z datum is re-established below via ProbeOne.
-o90 if [EXISTS[#<_probed>] EQ 0]
-  #<_probed>=0
-o90 endif
-o92 if [#<_probed> EQ 0]
-  $sd/run=/Loop/ProbeLoop.nc
-o92 endif
-
+; MaybeProbe re-datums G55 Z for T5 (or runs a full survey if nothing has
+; been probed this session); the height deltas #400-408 are reused.
 G0 X#100 Y#200 Z#<_toolchange_z>
 
 T5  ; select before length probing
-M0 (MSG,install T5, position toolsetter, then cycle start)
-
-; Re-zero Z for the new tool against the toolsetter
-$sd/run=/Loop/ProbeOne.nc
+M0 (MSG,install T5, then cycle start)
+$sd/run=/Loop/MaybeProbe.nc
 
 M0 (MSG,remove toolsetter and ensure vacuum is on)
 

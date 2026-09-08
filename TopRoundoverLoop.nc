@@ -5,21 +5,13 @@ G20
 ; Top side, first operation. Stock has been flipped from the bottom side.
 ; The XY grid (#100-108 / #200-208) carries over from the bottom run; if
 ; the fixturing changed, re-run PutterGrid.nc by hand first.
-T24  ; top roundover form mill - select before length probing
-
-; Probe if we don't already have valid probe data (e.g. run standalone).
-; BottomLoop clears #<_probed> at its end, so the normal post-flip run
-; re-probes here, capturing top-side heights into #300-308 / #400-408.
-o90 if [EXISTS[#<_probed>] EQ 0]
-  #<_probed>=0
-o90 endif
-o92 if [#<_probed> EQ 0]
-  $sd/run=/Loop/ProbeLoop.nc
-o92 endif
-
 G0 X#100 Y#200
 
-M0 (MSG,pause to remove toolsetter)
+T24  ; top roundover form mill
+M0 (MSG,install T24, then cycle start)
+$sd/run=/Loop/MaybeProbe.nc
+
+M0 (MSG,remove toolsetter)
 M0 (MSG,safety)
 
 S18000 M3  ; spindle on for the whole pattern
