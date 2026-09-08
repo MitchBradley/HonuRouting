@@ -15,12 +15,6 @@ o90 if [EXISTS[#<_grid_available>] EQ 0]
   o91 error [3]
 o90 endif
 
-; Toolsetter / backoff params - global so the tool-change re-probe in the
-; top loops can reuse them.  The probe rates and travel live in ProbeOne.nc.
-#<_toolsetter_height>=2.5 ; in
-#<_backoff_distance>=0.5 ; in
-#<_toolchange_z>=[#<_toolsetter_height>+#<_backoff_distance>]
-
 ; ==========================================================
 ; Execution Loop
 ; ==========================================================
@@ -35,7 +29,7 @@ o100 while [#<_i> LT 9]
   #<y_val> = #[200 + #<_i>]
   G0 X#<x_val> Y#<y_val>
 
-  $sd/run=/Loop/ProbeOne.nc
+  $sd/run=/Loop/ProbeCore.nc
   #[300 + #<_i>] = #5063         ; probe z
   #[400 + #<_i>] = [#5063 - #300]  ; delta z
 

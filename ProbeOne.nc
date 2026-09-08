@@ -1,16 +1,8 @@
-; Two-stage probe of the toolsetter at the current XY:
-; fast approach, pull off, slow re-probe.
-; On return: #5063 holds the probed Z, the tool sits at the slow-probe
-; contact point, and absolute mode (G90) is restored.  The caller
-; records the result, sets any datum, and backs off.
+; ProbeOne - probe the toolsetter once at the current XY, set the G55 Z
+; datum so the toolsetter surface reads #<_toolsetter_height>, then back off.
+; Used for the tool-change re-probe in the Top*Loop files.
 
-#<fast_rate>=10 ; in/min
-#<slow_rate>=1 ; in/min
-#<probe_drop>=0.6 ; in - max probe descent below current Z (safety margin above hard limit)
-#<pulloff_distance>=0.1 ; in
-
-G20
-G38.2 G91 F#<fast_rate> Z-#<probe_drop>
-G0 G91 Z#<pulloff_distance>
-G38.2 G91 F#<slow_rate> Z-#<probe_drop>
+$sd/run=/Loop/ProbeCore.nc
+G10 L20 P2 Z#<_toolsetter_height>  ; toolsetter surface -> toolsetter_height in G55
+G0 G91 Z#<_backoff_distance>
 G90
