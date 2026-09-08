@@ -11,7 +11,7 @@ o90 if [EXISTS[#<_probed>] EQ 0]
    #<_probed>=0
 o90 endif
 
-o91 IF [#<_probed> EQ 0]]
+o91 IF [#<_probed> EQ 0]
    $sd/run=/Loop/PutterGrid.nc
    $sd/run=/Loop/ProbeLoop.nc
 o91 endif
