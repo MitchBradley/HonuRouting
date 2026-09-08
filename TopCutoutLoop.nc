@@ -6,13 +6,16 @@ G20
 #<bias>=0.1
 
 ; Top side, final operation: cut all 9 pucks free from the stock.
-; No 9-point re-probe - reuses the top-side height deltas (#400-408) from
-; TopRoundoverLoop.nc; only re-zeros Z for the new tool against the toolsetter.
+; No 9-point re-probe - reuses the top-side height deltas (#400-408);
+; only re-zeros Z for the new tool against the toolsetter.
 ; The cutout runs ~0.040 in radial oversize on purpose (sanding stock in post).
-o90 if [EXISTS[#<_top_heights_available>] EQ 0]
-  (MSG, TopCutoutLoop: TopRoundoverLoop.nc has not been run - aborting)
-  o91 error [3]
+o90 if [EXISTS[#<_probed>] EQ 0]
+  #<_probed>=0
 o90 endif
+o92 if [#<_probed> EQ 0]
+  (MSG, TopCutoutLoop: no probe data - run TopRoundoverLoop.nc first)
+  o93 error [3]
+o92 endif
 
 G0 X#100 Y#200 Z#<_toolchange_z>
 

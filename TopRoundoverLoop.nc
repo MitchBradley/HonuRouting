@@ -9,10 +9,7 @@ G20
 ; Re-probe here to capture top-side stock heights: this overwrites
 ; #300-308 (probed Z) and #400-408 (deltas) with top-side values.
 T24  ; top roundover form mill - select before length probing
-$sd/run=/Loop/ProbeLoop.nc
-
-; Signal that top-side heights are available (read by TopTLinesLoop / TopCutoutLoop)
-#<_top_heights_available> = 1
+$sd/run=/Loop/ProbeLoop.nc   ; re-probes; sets #<_probed>=1
 
 G0 X#100 Y#200
 
