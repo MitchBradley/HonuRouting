@@ -12,8 +12,7 @@ o90 if [EXISTS[#<_probed>] EQ 0]
 o90 endif
 
 o91 IF [#<_probed> EQ 0]
-   $sd/run=/Loop/PutterGrid.nc
-   $sd/run=/Loop/ProbeLoop.nc
+   $sd/run=/Loop/ProbeLoop.nc   ; builds the grid too if #<_grid_available> is unset
 o91 endif
 
 G0 X#100 Y#200
