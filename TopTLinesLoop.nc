@@ -5,7 +5,7 @@ G20
 ; Top side, second operation: T-shaped sight-line insets on all 9 pucks.
 ; MaybeProbe re-datums G55 Z for T5 (or runs a full survey if nothing has
 ; been probed this session); the height deltas #400-408 are reused.
-G0 X#100 Y#200 Z#<_toolchange_z>
+G0 X#100 Y#200
 
 T5  ; select before length probing
 M0 (MSG,install T5, then cycle start)

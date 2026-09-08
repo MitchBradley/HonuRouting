@@ -9,7 +9,7 @@ G20
 ; MaybeProbe re-datums G55 Z for T3 (or runs a full survey if nothing has
 ; been probed this session); the height deltas #400-408 are reused.
 ; The cutout runs ~0.040 in radial oversize on purpose (sanding stock in post).
-G0 X#100 Y#200 Z#<_toolchange_z>
+G0 X#100 Y#200
 
 T3  ; select before length probing
 M0 (MSG,install T3, then cycle start)
